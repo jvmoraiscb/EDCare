@@ -1,5 +1,6 @@
 #include "lista_idoso.h"
 
+#include "lista_cuidador.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -93,10 +94,6 @@ Idoso* Retorna_idoso(Lista_idoso* lista){
     return lista->idoso;
 }
 
-Lista_idoso* Retorna_lista_amigos_idoso(Idoso* idoso){
-    return (Lista_idoso*)Retorna_amigos_idoso(idoso);
-}
-
 void Imprime_lista_idoso(Lista_idoso* lista){
     Lista_idoso* lista_temp = lista;
     while(lista_temp != NULL){
@@ -109,8 +106,10 @@ void Imprime_lista_idoso(Lista_idoso* lista){
 void Imprime_lista_detalhada_idoso(Lista_idoso* lista){
     Lista_idoso* lista_temp = lista;
     while(lista_temp != NULL){
-        printf("%s\n", Retorna_nome_idoso(lista_temp->idoso));
-        Imprime_lista_idoso(Retorna_lista_amigos_idoso(lista_temp->idoso));
+        printf("IDOSO:\n%s\nAMIGOS:\n", Retorna_nome_idoso(lista_temp->idoso));
+        Imprime_lista_idoso(Retorna_amigos_idoso(lista_temp->idoso));
+        printf("CUIDADORES:\n");
+        Imprime_lista_cuidador(Retorna_cuidadores_idoso(lista_temp->idoso));
         lista_temp = lista_temp->prox;
     }
     printf("\n");

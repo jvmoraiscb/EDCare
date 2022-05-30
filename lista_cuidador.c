@@ -66,6 +66,10 @@ Lista_cuidador* Encontra_lista_cuidador(Lista_cuidador* lista, char* nome){
     return lista_temp;
 }
 
+Cuidador* Retorna_cuidador(Lista_cuidador* lista){
+    return lista->cuidador;
+}
+
 void Imprime_lista_cuidador(Lista_cuidador* lista){
     Lista_cuidador* lista_temp = lista;
     while(lista_temp != NULL){

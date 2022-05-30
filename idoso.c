@@ -38,6 +38,14 @@ void Destroi_idoso(Idoso* idoso){
     free(idoso);
 }
 
+void Insere_amigo_idoso(Idoso* idoso, Idoso* amigo){
+    idoso->amigos = Insere_lista_idoso(idoso->amigos, amigo);
+}
+
+void Insere_cuidador_idoso(Idoso* idoso, Cuidador* cuidador){
+    idoso->cuidadores = Insere_lista_cuidador(idoso->cuidadores, cuidador);
+}
+
 char* Retorna_nome_idoso(Idoso* idoso){
     return idoso->nome;
 }
@@ -58,10 +66,10 @@ int Retorna_queda_idoso(Idoso* idoso){
     return idoso->queda;
 }
 
-void* Retorna_amigos_idoso(Idoso* idoso){
+Lista_idoso* Retorna_amigos_idoso(Idoso* idoso){
     return idoso->amigos;
 }
 
-void* Retorna_cuidadores_idoso(Idoso* idoso){
+Lista_cuidador* Retorna_cuidadores_idoso(Idoso* idoso){
     return idoso->cuidadores;
 }

@@ -33,7 +33,8 @@ int main(int argc, char *argv[]){
     Destroi_idoso(Ivanor);
     */
     Apoio* equipe = Inicializa_apoio();
-    Carrega_apoio(equipe);
+    Carrega_idosos_apoio(equipe);
+    Carrega_cuidadores_apoio(equipe);
     Imprime_apoio(equipe);
 
     return 0;
