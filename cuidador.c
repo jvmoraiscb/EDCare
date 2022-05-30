@@ -1,15 +1,30 @@
 #include "cuidador.h"
 
 #include <stdio.h>
-#include "ponto.h"
+#include <stdlib.h>
+#include <string.h>
 
 struct st_cuidador{
     char* nome;
-    ponto* posicoes;
+    unsigned long int latitude;
+    unsigned long int longitude;
 };
 
-struct st_lista_cuidador{
-    cuidador* cuidador;
-    lista_cuidador* prox;
-};
+Cuidador* Constroi_cuidador(char* nome){
+    Cuidador* cuidador = malloc(sizeof(Cuidador));
+    cuidador->nome = malloc(sizeof(char)*strlen(nome)+1);
+    strcpy(cuidador->nome, nome);
+    cuidador->latitude = 0;
+    cuidador->longitude = 0;
+    return cuidador;
+}
+
+void Destroi_cuidador(Cuidador* cuidador){
+    free(cuidador->nome);
+    free(cuidador);
+}
+
+char* Retorna_nome_cuidador(Cuidador* cuidador){
+    return cuidador->nome;
+}
 
