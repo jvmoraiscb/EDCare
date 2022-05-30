@@ -1,6 +1,7 @@
 #include "idoso.h"
 #include "lista_idoso.h"
 #include "apoio.h"
+#include "cuidador.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>

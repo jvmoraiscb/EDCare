@@ -44,3 +44,8 @@ void Modifica_longitude_cuidador(Cuidador* cuidador, unsigned long int longitude
     cuidador->longitude = longitude;
 }
 
+void Atualiza_leituras_cuidador(Cuidador* cuidador, unsigned long int latitude, unsigned long int longitude){
+    Modifica_latitude_cuidador(cuidador, latitude);
+    Modifica_longitude_cuidador(cuidador, longitude);
+}
+

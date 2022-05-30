@@ -11,5 +11,6 @@ unsigned long int Retorna_latitude_cuidador(Cuidador* cuidador);
 void Modifica_latitude_cuidador(Cuidador* cuidador, unsigned long int latitude);
 unsigned long int Retorna_longitude_cuidador(Cuidador* cuidador);
 void Modifica_longitude_cuidador(Cuidador* cuidador, unsigned long int longitude);
+void Atualiza_leituras_cuidador(Cuidador* cuidador, unsigned long int latitude, unsigned long int longitude);
 
 #endif // CUIDADOR_H

@@ -42,6 +42,12 @@ void Insere_amigo_idoso(Idoso* idoso, Idoso* amigo){
     idoso->amigos = Insere_lista_idoso(idoso->amigos, amigo);
 }
 
+void Remove_amigo_idoso(Idoso* idoso, char* nome){
+    if(Encontra_lista_idoso(idoso->amigos, nome) != NULL){
+        idoso->amigos = Remove_lista_idoso(idoso->amigos, nome);
+    }
+}
+
 void Insere_cuidador_idoso(Idoso* idoso, Cuidador* cuidador){
     idoso->cuidadores = Insere_lista_cuidador(idoso->cuidadores, cuidador);
 }

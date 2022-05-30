@@ -84,7 +84,6 @@ Lista_idoso* Encontra_lista_idoso(Lista_idoso* lista, char* nome){
         lista_temp = lista_temp->prox;
     }
     if(lista_temp == NULL){
-        printf("ERRO: Idoso nao encontrado!\n");
         return NULL;
     }
     return lista_temp;
