@@ -57,6 +57,32 @@ void Carrega_idosos_apoio(Apoio* apoio){
 
 }
 
+void Atualiza_idosos_apoio(Apoio* apoio, int instante){
+    Lista_idoso* lista_temp = apoio->idosos;
+    while(lista_temp != NULL){
+        /*ARMAZENA O ARQUIVO REFERENTE AO IDOSO EM UM VETOR DE STRINGS*/
+        char nome_file_idoso[100];
+        sprintf(nome_file_idoso, "Entrada/%s.txt", Retorna_nome_idoso(Retorna_idoso(lista_temp)));
+        FILE* file_idoso = fopen(nome_file_idoso, "r");
+        char idoso_txt[30][1000];
+        int i0 = 0;
+        while(fscanf(file_idoso, "%999s", idoso_txt[i0]) == 1){
+            i0++;
+        }
+        fclose(file_idoso);
+
+        /*LE OS DADOS REFERENTES AO INSTANTE(LINHA DO ARQUIVO) CHAMADO NA FUNCAO*/
+        unsigned long int latitude, longitude;
+        float temperatura;
+        int queda;
+        sscanf(idoso_txt[instante], "%f;%lu;%lu;%d", &temperatura, &latitude, &longitude, &queda);
+        Idoso* idoso = Retorna_idoso(lista_temp);
+        Atualiza_leituras_idoso(idoso, latitude, longitude, temperatura, queda);
+        printf("%s = Temperatura:%.2f Latitude:%lu Longitude:%lu Queda:%d\n", Retorna_nome_idoso(idoso), Retorna_temperatura_idoso(idoso), Retorna_latitude_idoso(idoso), Retorna_longitude_idoso(idoso), Retorna_queda_idoso(idoso));
+        lista_temp = Retorna_prox_lista_idoso(lista_temp);
+    }
+}
+
 void Carrega_cuidadores_apoio(Apoio* apoio){
     FILE* file_cuidadores = fopen("Entrada/cuidadores.txt", "r");
     char cuidadores_txt[30][1000];
@@ -99,6 +125,13 @@ void Carrega_cuidadores_apoio(Apoio* apoio){
             string[i]=strtok(NULL,delimit);
         }
     }
+}
+
+void Atualiza_cuidadores_apoio(Apoio* apoio, int instante){
+
+}
+void Verifica_idosos_apoio(Apoio* apoio){
+
 }
 
 void Imprime_apoio(Apoio* apoio){

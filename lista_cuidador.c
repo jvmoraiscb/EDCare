@@ -70,6 +70,13 @@ Cuidador* Retorna_cuidador(Lista_cuidador* lista){
     return lista->cuidador;
 }
 
+Lista_cuidador* Retorna_prox_lista_cuidador(Lista_cuidador* lista){
+    return lista->prox;
+}
+Lista_cuidador* Retorna_anterior_lista_cuidador(Lista_cuidador* lista){
+    return lista->anterior;
+}
+
 void Imprime_lista_cuidador(Lista_cuidador* lista){
     Lista_cuidador* lista_temp = lista;
     while(lista_temp != NULL){

@@ -54,16 +54,39 @@ unsigned long int Retorna_latitude_idoso(Idoso* idoso){
     return idoso->latitude;
 }
 
+void Modifica_latitude_idoso(Idoso*idoso, unsigned long int latitude){
+    idoso->latitude = latitude;
+}
+
 unsigned long int Retorna_longitude_idoso(Idoso* idoso){
     return idoso->longitude;
+}
+
+void Modifica_longitude_idoso(Idoso* idoso, unsigned long int longitude){
+    idoso->longitude = longitude;
 }
 
 float Retorna_temperatura_idoso(Idoso* idoso){
     return idoso->temperatura;
 }
 
+void Modifica_temperatura_idoso(Idoso* idoso, float temperatura){
+    idoso->temperatura = temperatura;
+}
+
 int Retorna_queda_idoso(Idoso* idoso){
     return idoso->queda;
+}
+
+void Modifica_queda_idoso(Idoso* idoso, int queda){
+    idoso->queda = queda;
+}
+
+void Atualiza_leituras_idoso(Idoso* idoso, unsigned long int latitude, unsigned long int longitude, float temperatura, int queda){
+    Modifica_latitude_idoso(idoso, latitude);
+    Modifica_longitude_idoso(idoso, longitude);
+    Modifica_temperatura_idoso(idoso, temperatura);
+    Modifica_queda_idoso(idoso, queda);
 }
 
 Lista_idoso* Retorna_amigos_idoso(Idoso* idoso){

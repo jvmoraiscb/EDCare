@@ -94,6 +94,14 @@ Idoso* Retorna_idoso(Lista_idoso* lista){
     return lista->idoso;
 }
 
+Lista_idoso* Retorna_prox_lista_idoso(Lista_idoso* lista){
+    return lista->prox;
+}
+
+Lista_idoso* Retorna_anterior_lista_idoso(Lista_idoso* lista){
+    return lista->anterior;
+}
+
 void Imprime_lista_idoso(Lista_idoso* lista){
     Lista_idoso* lista_temp = lista;
     while(lista_temp != NULL){

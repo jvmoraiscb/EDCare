@@ -8,6 +8,8 @@ void Destroi_lista_cuidador(Lista_cuidador* lista);
 Lista_cuidador* Insere_lista_cuidador(Lista_cuidador* lista, Cuidador* cuidador);
 Lista_cuidador* Encontra_lista_cuidador(Lista_cuidador* lista, char* nome);
 Cuidador* Retorna_cuidador(Lista_cuidador* lista);
+Lista_cuidador* Retorna_prox_lista_cuidador(Lista_cuidador* lista);
+Lista_cuidador* Retorna_anterior_lista_cuidador(Lista_cuidador* lista);
 void Imprime_lista_cuidador(Lista_cuidador* lista);
 
 #endif // LISTA_CUIDADOR_H

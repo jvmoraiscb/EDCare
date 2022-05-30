@@ -28,3 +28,19 @@ char* Retorna_nome_cuidador(Cuidador* cuidador){
     return cuidador->nome;
 }
 
+unsigned long int Retorna_latitude_cuidador(Cuidador* cuidador){
+    return cuidador->latitude;
+}
+
+void Modifica_latitude_cuidador(Cuidador* cuidador, unsigned long int latitude){
+    cuidador->latitude = latitude;
+}
+
+unsigned long int Retorna_longitude_cuidador(Cuidador* cuidador){
+    return cuidador->longitude;
+}
+
+void Modifica_longitude_cuidador(Cuidador* cuidador, unsigned long int longitude){
+    cuidador->longitude = longitude;
+}
+
