@@ -21,7 +21,7 @@ main.o: main.c
 create_executable: 
 	@ echo "\033[1;32m"
 	@ echo "Creating executable..."
-	@ $(CC) -o $(NAME_PROGRAM) $(O_FILES)
+	@ $(CC) -o $(NAME_PROGRAM) $(O_FILES) -lm
 	@ echo "\033[0m"
 
 run: 

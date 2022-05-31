@@ -113,7 +113,7 @@ Lista_idoso* Retorna_amigos_idoso(Idoso* idoso){
 Idoso* Encontra_amigo_menos_distante_idoso(Idoso* idoso){
     int i = 0;
     float menor_distancia;
-    Idoso* amigo_menos_distante;
+    Idoso* amigo_menos_distante = NULL;
 
     Lista_idoso* lista_temp = idoso->amigos;
     while(lista_temp != NULL){

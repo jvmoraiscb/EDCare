@@ -187,7 +187,13 @@ void Verifica_idosos_apoio(Apoio* apoio){
                 Modifica_febres_seguidas_idoso(idoso, 0);
             }
             else{
-                fprintf(file_idoso, "febre baixa, acionou %s\n", Retorna_nome_idoso(Encontra_amigo_menos_distante_idoso(idoso)));
+                Idoso* amigo = Encontra_amigo_menos_distante_idoso(idoso);
+                if(amigo != NULL){
+                    fprintf(file_idoso, "febre baixa, acionou amigo %s\n", Retorna_nome_idoso(amigo));
+                }
+                else{
+                    fprintf(file_idoso, "febre baixa mas, infelizmente, o idoso esta sem amigos na rede\n");
+                }
             }
         }
         else{
