@@ -20,6 +20,7 @@ int main(int argc, char *argv[]){
     
     for(i = 0; i < qtd_leituras; i++){
         Atualiza_idosos_apoio(equipe, i);
+        Atualiza_cuidadores_apoio(equipe, i);
     }
 
     /*

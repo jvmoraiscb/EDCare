@@ -77,6 +77,11 @@ void Atualiza_idosos_apoio(Apoio* apoio, int instante){
         int queda;
         if(strcmp(idoso_txt[instante], "falecimento") == 0){
             Idoso* falecido = Retorna_idoso(lista_temp);
+            char nome_file_falecido[100];
+            sprintf(nome_file_falecido, "Saida/%s-saida.txt", Retorna_nome_idoso(falecido));
+            FILE* file_falecido = fopen(nome_file_falecido, "a");
+            fprintf(file_falecido, "falecimento\n");
+            fclose(file_falecido);
             lista_temp = Retorna_prox_lista_idoso(lista_temp);
             Remove_falecido_apoio(apoio, Retorna_nome_idoso(falecido));
         }
@@ -85,7 +90,6 @@ void Atualiza_idosos_apoio(Apoio* apoio, int instante){
             Idoso* idoso = Retorna_idoso(lista_temp);
             Atualiza_leituras_idoso(idoso, latitude, longitude, temperatura, queda);
             printf("%s = Instante:%d Temperatura:%.2f Latitude:%lu Longitude:%lu Queda:%d\n", Retorna_nome_idoso(idoso), instante, Retorna_temperatura_idoso(idoso), Retorna_latitude_idoso(idoso), Retorna_longitude_idoso(idoso), Retorna_queda_idoso(idoso));
-
             lista_temp = Retorna_prox_lista_idoso(lista_temp);
         }
     }
@@ -159,9 +163,41 @@ void Atualiza_cuidadores_apoio(Apoio* apoio, int instante){
     }
 }
 
-/*void Verifica_idosos_apoio(Apoio* apoio){
+void Verifica_idosos_apoio(Apoio* apoio){
+    Lista_idoso* lista_temp = apoio->idosos;
+    while(lista_temp != NULL){
+        Idoso* idoso = Retorna_idoso(lista_temp);
+        char nome_file_idoso[100];
+        sprintf(nome_file_idoso, "Saida/%s-saida.txt", Retorna_nome_idoso(idoso));
+        FILE* file_idoso = fopen(nome_file_idoso, "a");
 
-}*/
+        /*EM CASO DE QUEDA*/
+        if(Retorna_queda_idoso(idoso) == 1){
+            fprintf(file_idoso, "queda, acionou %s\n", Retorna_nome_cuidador(Encontra_cuidador_menos_distante_idoso(idoso)));
+        }
+        /*EM CASO DE FEBRE ALTA*/
+        else if(Retorna_temperatura_idoso(idoso) >= 38.0){
+            fprintf(file_idoso, "febre alta, acionou %s\n", Retorna_nome_cuidador(Encontra_cuidador_menos_distante_idoso(idoso)));
+        }
+        /*EM CASO DE FEBRE BAIXA*/
+        else if(Retorna_temperatura_idoso(idoso) >= 37.0){
+            Modifica_febres_seguidas_idoso(idoso, Retorna_febres_seguidas_idoso(idoso)+1);
+            if(Retorna_febres_seguidas_idoso(idoso) == 4){
+                fprintf(file_idoso, "febre baixa pela quarta vez, acionou %s\n", Retorna_nome_cuidador(Encontra_cuidador_menos_distante_idoso(idoso)));
+                Modifica_febres_seguidas_idoso(idoso, 0);
+            }
+            else{
+                fprintf(file_idoso, "febre baixa, acionou %s\n", Retorna_nome_idoso(Encontra_amigo_menos_distante_idoso(idoso)));
+            }
+        }
+        else{
+            fprintf(file_idoso, "tudo ok\n");
+        }
+
+        fclose(file_idoso);
+        lista_temp = Retorna_prox_lista_idoso(lista_temp);
+    }
+}
 
 void Remove_falecido_apoio(Apoio* apoio, char* nome){
     Lista_idoso* lista_temp = apoio->idosos;
