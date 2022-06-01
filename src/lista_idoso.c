@@ -63,8 +63,8 @@ Lista_idoso* Remove_lista_idoso(Lista_idoso* lista, char* nome){
         }
         /*CASO SEJA O PRIMEIRO DA LISTA*/
         else if(lista_alvo->anterior == NULL){
+            (lista_alvo->prox)->anterior = NULL;
             lista = lista_alvo->prox;
-            lista->anterior = NULL;
         }
         /*CASO SEJA O ULTIMO DA LISTA*/
         else if(lista_alvo->prox == NULL){
@@ -72,9 +72,10 @@ Lista_idoso* Remove_lista_idoso(Lista_idoso* lista, char* nome){
         }
         else{
             (lista_alvo->anterior)->prox = lista_alvo->prox;
+            (lista_alvo->prox)->anterior = lista_alvo->anterior;
         }
+        free(lista_alvo);
     }
-    free(lista_alvo);
     return lista;
 }
 
