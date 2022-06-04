@@ -25,5 +25,7 @@ int main(int argc, char *argv[]){
         Verifica_idosos_apoio(equipe);
     }
 
+    Destroi_apoio(equipe);
+
     return 0;
 }

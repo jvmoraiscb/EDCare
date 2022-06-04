@@ -4,6 +4,7 @@
 typedef struct st_apoio Apoio;
 
 Apoio* Inicializa_apoio();
+void Destroi_apoio(Apoio* apoio);
 void Carrega_idosos_apoio(Apoio* apoio);
 void Atualiza_idosos_apoio(Apoio* apoio, int instante);
 void Carrega_cuidadores_apoio(Apoio* apoio);

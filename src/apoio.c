@@ -19,6 +19,22 @@ Apoio* Inicializa_apoio(){
     return apoio;
 }
 
+void Destroi_apoio(Apoio* apoio){
+    Lista_idoso* lista_temp = apoio->idosos;
+    while(lista_temp != NULL){
+        Destroi_idoso(Retorna_idoso(lista_temp));
+        lista_temp = Retorna_prox_lista_idoso(lista_temp);
+    }
+    Destroi_lista_idoso(apoio->idosos);
+    Lista_cuidador* lista_temp2 = apoio->cuidadores;
+    while(lista_temp2 != NULL){
+        Destroi_cuidador(Retorna_cuidador(lista_temp2));
+        lista_temp2 = Retorna_prox_lista_cuidador(lista_temp2);
+    }
+    Destroi_lista_cuidador(apoio->cuidadores);
+    free(apoio);
+}
+
 void Carrega_idosos_apoio(Apoio* apoio){
     FILE* file_apoio = fopen("Entrada/apoio.txt", "r");
     char apoio_txt[30][1000];
@@ -88,7 +104,7 @@ void Atualiza_idosos_apoio(Apoio* apoio, int instante){
             sscanf(idoso_txt[instante], "%f;%ld;%ld;%d", &temperatura, &latitude, &longitude, &queda);
             Idoso* idoso = Retorna_idoso(lista_temp);
             Atualiza_leituras_idoso(idoso, latitude, longitude, temperatura, queda);
-            printf("%s = Instante:%d Temperatura:%.2f Latitude:%ld Longitude:%ld Queda:%d\n", Retorna_nome_idoso(idoso), instante, Retorna_temperatura_idoso(idoso), Retorna_latitude_idoso(idoso), Retorna_longitude_idoso(idoso), Retorna_queda_idoso(idoso));
+            //printf("%s = Instante:%d Temperatura:%.2f Latitude:%ld Longitude:%ld Queda:%d\n", Retorna_nome_idoso(idoso), instante, Retorna_temperatura_idoso(idoso), Retorna_latitude_idoso(idoso), Retorna_longitude_idoso(idoso), Retorna_queda_idoso(idoso));
             lista_temp = Retorna_prox_lista_idoso(lista_temp);
         }
     }
@@ -157,7 +173,7 @@ void Atualiza_cuidadores_apoio(Apoio* apoio, int instante){
         sscanf(cuidador_txt[instante], "%ld;%ld", &latitude, &longitude);
         Cuidador* cuidador = Retorna_cuidador(lista_temp);
         Atualiza_leituras_cuidador(cuidador, latitude, longitude);
-        printf("%s = Instante:%d Latitude:%ld Longitude:%ld\n", Retorna_nome_cuidador(cuidador), instante, Retorna_latitude_cuidador(cuidador), Retorna_longitude_cuidador(cuidador));
+        //printf("%s = Instante:%d Latitude:%ld Longitude:%ld\n", Retorna_nome_cuidador(cuidador), instante, Retorna_latitude_cuidador(cuidador), Retorna_longitude_cuidador(cuidador));
         lista_temp = Retorna_prox_lista_cuidador(lista_temp);
     }
 }

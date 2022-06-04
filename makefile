@@ -33,16 +33,16 @@ $(OBJ)/%.o: $(SRC)/%.c $(INCLUDE)/%.h
 # rule for create_final_progam
 $(BIN)/%: 
 	@ echo "\033[1;32m"
-	@ echo "Creating executable..."
+	@ echo "Creating executable...\n"
 	@ $(COMPILER) $< $(OBJ)/*.o -I $(INCLUDE) -o $@ $(FLAGS)
 	@ echo "\033[0m"
 
 # create all needed directories
 create_dir: 
 	@ echo "\033[1;32m"
-	@ echo "Creating $(OBJ) directory...\n"
+	@ echo "Creating $(OBJ) directory...\n\n"
 	@ mkdir $(OBJ)
-	@ echo "Creating $(BIN) directory..."
+	@ echo "Creating $(BIN) directory...\n\n"
 	@ mkdir $(BIN)
 	@ echo "Creating $(SAIDA) directory..."
 	@ mkdir $(SAIDA)
