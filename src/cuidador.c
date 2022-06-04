@@ -6,8 +6,8 @@
 
 struct st_cuidador{
     char* nome;
-    unsigned long int latitude;
-    unsigned long int longitude;
+    long int latitude;
+    long int longitude;
 };
 
 Cuidador* Constroi_cuidador(char* nome){
@@ -28,23 +28,23 @@ char* Retorna_nome_cuidador(Cuidador* cuidador){
     return cuidador->nome;
 }
 
-unsigned long int Retorna_latitude_cuidador(Cuidador* cuidador){
+long int Retorna_latitude_cuidador(Cuidador* cuidador){
     return cuidador->latitude;
 }
 
-void Modifica_latitude_cuidador(Cuidador* cuidador, unsigned long int latitude){
+void Modifica_latitude_cuidador(Cuidador* cuidador, long int latitude){
     cuidador->latitude = latitude;
 }
 
-unsigned long int Retorna_longitude_cuidador(Cuidador* cuidador){
+long int Retorna_longitude_cuidador(Cuidador* cuidador){
     return cuidador->longitude;
 }
 
-void Modifica_longitude_cuidador(Cuidador* cuidador, unsigned long int longitude){
+void Modifica_longitude_cuidador(Cuidador* cuidador, long int longitude){
     cuidador->longitude = longitude;
 }
 
-void Atualiza_leituras_cuidador(Cuidador* cuidador, unsigned long int latitude, unsigned long int longitude){
+void Atualiza_leituras_cuidador(Cuidador* cuidador, long int latitude, long int longitude){
     Modifica_latitude_cuidador(cuidador, latitude);
     Modifica_longitude_cuidador(cuidador, longitude);
 }

@@ -12,19 +12,18 @@ int main(int argc, char *argv[]){
         return 1;
     }
     int i, qtd_leituras = atoi(argv[1]);
-    printf("%d\n",qtd_leituras);
     
+    /*EFETUA A LEITURA DOS ARQUIVOS APOIO.TXT E CUIDADORES.TXT*/
     Apoio* equipe = Inicializa_apoio();
     Carrega_idosos_apoio(equipe);
     Carrega_cuidadores_apoio(equipe);
-    //Imprime_apoio(equipe);
     
+    /*ATUALIZA E VERIFICA AS INFORMACOES DE CADA IDOSO*/
     for(i = 0; i < qtd_leituras; i++){
         Atualiza_idosos_apoio(equipe, i);
         Atualiza_cuidadores_apoio(equipe, i);
-        printf("---\n");
         Verifica_idosos_apoio(equipe);
-        printf("---\n");
     }
+
     return 0;
 }

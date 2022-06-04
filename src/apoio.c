@@ -71,7 +71,7 @@ void Atualiza_idosos_apoio(Apoio* apoio, int instante){
         fclose(file_idoso);
 
         /*LE OS DADOS REFERENTES AO INSTANTE(LINHA DO ARQUIVO) CHAMADO NA FUNCAO*/
-        unsigned long int latitude, longitude;
+        long int latitude, longitude;
         float temperatura;
         int queda;
         if(strcmp(idoso_txt[instante], "falecimento") == 0){
@@ -85,10 +85,10 @@ void Atualiza_idosos_apoio(Apoio* apoio, int instante){
             Remove_falecido_apoio(apoio, Retorna_nome_idoso(falecido));
         }
         else{
-            sscanf(idoso_txt[instante], "%f;%lu;%lu;%d", &temperatura, &latitude, &longitude, &queda);
+            sscanf(idoso_txt[instante], "%f;%ld;%ld;%d", &temperatura, &latitude, &longitude, &queda);
             Idoso* idoso = Retorna_idoso(lista_temp);
             Atualiza_leituras_idoso(idoso, latitude, longitude, temperatura, queda);
-            printf("%s = Instante:%d Temperatura:%.2f Latitude:%lu Longitude:%lu Queda:%d\n", Retorna_nome_idoso(idoso), instante, Retorna_temperatura_idoso(idoso), Retorna_latitude_idoso(idoso), Retorna_longitude_idoso(idoso), Retorna_queda_idoso(idoso));
+            printf("%s = Instante:%d Temperatura:%.2f Latitude:%ld Longitude:%ld Queda:%d\n", Retorna_nome_idoso(idoso), instante, Retorna_temperatura_idoso(idoso), Retorna_latitude_idoso(idoso), Retorna_longitude_idoso(idoso), Retorna_queda_idoso(idoso));
             lista_temp = Retorna_prox_lista_idoso(lista_temp);
         }
     }
@@ -153,11 +153,11 @@ void Atualiza_cuidadores_apoio(Apoio* apoio, int instante){
         fclose(file_cuidador);
 
         /*LE OS DADOS REFERENTES AO INSTANTE(LINHA DO ARQUIVO) CHAMADO NA FUNCAO*/
-        unsigned long int latitude, longitude;
-        sscanf(cuidador_txt[instante], "%lu;%lu", &latitude, &longitude);
+        long int latitude, longitude;
+        sscanf(cuidador_txt[instante], "%ld;%ld", &latitude, &longitude);
         Cuidador* cuidador = Retorna_cuidador(lista_temp);
         Atualiza_leituras_cuidador(cuidador, latitude, longitude);
-        printf("%s = Instante:%d Latitude:%lu Longitude:%lu\n", Retorna_nome_cuidador(cuidador), instante, Retorna_latitude_cuidador(cuidador), Retorna_longitude_cuidador(cuidador));
+        printf("%s = Instante:%d Latitude:%ld Longitude:%ld\n", Retorna_nome_cuidador(cuidador), instante, Retorna_latitude_cuidador(cuidador), Retorna_longitude_cuidador(cuidador));
         lista_temp = Retorna_prox_lista_cuidador(lista_temp);
     }
 }
@@ -165,34 +165,31 @@ void Atualiza_cuidadores_apoio(Apoio* apoio, int instante){
 void Verifica_idosos_apoio(Apoio* apoio){
     Lista_idoso* lista_temp = apoio->idosos;
     while(lista_temp != NULL){
-    	printf("1\n");
         Idoso* idoso = Retorna_idoso(lista_temp);
         char nome_file_idoso[100];
         sprintf(nome_file_idoso, "Saida/%s-saida.txt", Retorna_nome_idoso(idoso));
         FILE* file_idoso = fopen(nome_file_idoso, "a");
-        printf("2\n");
         /*EM CASO DE QUEDA*/
         if(Retorna_queda_idoso(idoso) == 1){
-            printf("2.1\n");
             fprintf(file_idoso, "queda, acionou %s\n", Retorna_nome_cuidador(Encontra_cuidador_menos_distante_idoso(idoso)));
+            if(Retorna_temperatura_idoso(idoso) >= 38.0){
+                Modifica_febres_seguidas_idoso(idoso, 0);
+            }
         }
         /*EM CASO DE FEBRE ALTA*/
         else if(Retorna_temperatura_idoso(idoso) >= 38.0){
-            printf("2.2\n");
             fprintf(file_idoso, "febre alta, acionou %s\n", Retorna_nome_cuidador(Encontra_cuidador_menos_distante_idoso(idoso)));
+            Modifica_febres_seguidas_idoso(idoso, 0);
         }
         /*EM CASO DE FEBRE BAIXA*/
         else if(Retorna_temperatura_idoso(idoso) >= 37.0){
-            printf("2.3\n");
             Modifica_febres_seguidas_idoso(idoso, Retorna_febres_seguidas_idoso(idoso)+1);
             if(Retorna_febres_seguidas_idoso(idoso) == 4){
                 fprintf(file_idoso, "febre baixa pela quarta vez, acionou %s\n", Retorna_nome_cuidador(Encontra_cuidador_menos_distante_idoso(idoso)));
                 Modifica_febres_seguidas_idoso(idoso, 0);
             }
             else{
-                printf("2.4 - %s\n", Retorna_nome_idoso(idoso));
                 Idoso* amigo = Encontra_amigo_menos_distante_idoso(idoso);
-                printf("2.5\n");
                 if(amigo != NULL){
                     fprintf(file_idoso, "febre baixa, acionou amigo %s\n", Retorna_nome_idoso(amigo));
                 }
@@ -204,7 +201,6 @@ void Verifica_idosos_apoio(Apoio* apoio){
         else{
             fprintf(file_idoso, "tudo ok\n");
         }
-        printf("3\n");
         fclose(file_idoso);
         lista_temp = Retorna_prox_lista_idoso(lista_temp);
     }

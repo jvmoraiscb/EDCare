@@ -11,8 +11,8 @@
 
 struct st_idoso{
     char* nome;
-    unsigned long int latitude;
-    unsigned long int longitude;
+    long int latitude;
+    long int longitude;
     float temperatura;
     int febres_seguidas;
     int queda;
@@ -59,19 +59,19 @@ char* Retorna_nome_idoso(Idoso* idoso){
     return idoso->nome;
 }
 
-unsigned long int Retorna_latitude_idoso(Idoso* idoso){
+long int Retorna_latitude_idoso(Idoso* idoso){
     return idoso->latitude;
 }
 
-void Modifica_latitude_idoso(Idoso*idoso, unsigned long int latitude){
+void Modifica_latitude_idoso(Idoso*idoso, long int latitude){
     idoso->latitude = latitude;
 }
 
-unsigned long int Retorna_longitude_idoso(Idoso* idoso){
+long int Retorna_longitude_idoso(Idoso* idoso){
     return idoso->longitude;
 }
 
-void Modifica_longitude_idoso(Idoso* idoso, unsigned long int longitude){
+void Modifica_longitude_idoso(Idoso* idoso, long int longitude){
     idoso->longitude = longitude;
 }
 
@@ -99,7 +99,7 @@ void Modifica_queda_idoso(Idoso* idoso, int queda){
     idoso->queda = queda;
 }
 
-void Atualiza_leituras_idoso(Idoso* idoso, unsigned long int latitude, unsigned long int longitude, float temperatura, int queda){
+void Atualiza_leituras_idoso(Idoso* idoso, long int latitude, long int longitude, float temperatura, int queda){
     Modifica_latitude_idoso(idoso, latitude);
     Modifica_longitude_idoso(idoso, longitude);
     Modifica_temperatura_idoso(idoso, temperatura);
@@ -114,12 +114,15 @@ Idoso* Encontra_amigo_menos_distante_idoso(Idoso* idoso){
     int i = 0;
     float menor_distancia;
     Idoso* amigo_menos_distante = NULL;
-    Imprime_lista_idoso(idoso->amigos);
     Lista_idoso* lista_temp = idoso->amigos;
     while(lista_temp != NULL){
         Idoso* amigo = Retorna_idoso(lista_temp);
-        float distancia = sqrt(pow(Retorna_latitude_idoso(idoso) - Retorna_latitude_idoso(amigo),2) + pow(Retorna_longitude_idoso(idoso) - Retorna_longitude_idoso(amigo), 2));
-        if(i == 0 || distancia < menor_distancia){
+        double distancia = pow(Retorna_latitude_idoso(idoso) - Retorna_latitude_idoso(amigo),2) + pow(Retorna_longitude_idoso(idoso) - Retorna_longitude_idoso(amigo), 2);
+        if(i == 0){
+            menor_distancia = distancia;
+            amigo_menos_distante = amigo;
+        }
+        else if(distancia < menor_distancia){
             menor_distancia = distancia;
             amigo_menos_distante = amigo;
         }
@@ -141,8 +144,12 @@ Cuidador* Encontra_cuidador_menos_distante_idoso(Idoso* idoso){
     Lista_cuidador* lista_temp = idoso->cuidadores;
     while(lista_temp != NULL){
         Cuidador* cuidador = Retorna_cuidador(lista_temp);
-        float distancia = sqrt(pow(Retorna_latitude_idoso(idoso) - Retorna_latitude_cuidador(cuidador),2) + pow(Retorna_longitude_idoso(idoso) - Retorna_longitude_cuidador(cuidador), 2));
-        if(i == 0 || distancia < menor_distancia){
+        float distancia = pow(Retorna_latitude_idoso(idoso) - Retorna_latitude_cuidador(cuidador),2) + pow(Retorna_longitude_idoso(idoso) - Retorna_longitude_cuidador(cuidador), 2);
+        if(i == 0){
+            menor_distancia = distancia;
+            cuidador_menos_distante = cuidador;
+        }
+        else if(distancia < menor_distancia){
             menor_distancia = distancia;
             cuidador_menos_distante = cuidador;
         }
