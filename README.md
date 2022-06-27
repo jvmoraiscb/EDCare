@@ -1,6 +1,6 @@
-# EDCare:
+# EDCare
 
-## Introdução
+## Introdução:
 EDCare é um trabalho da disciplina de Estrutura de Dados I da Universidade Federal do Espírito Santo.
 Todas as especificações do trabalho estão presentes no pdf, mas em resumo, seu objetivo é de construir um sistema de monitoramento de idosos, através de TADs e listas encadeadas.
 Desenvolvido por: João Victor Morais e Talles Weiler
@@ -28,12 +28,12 @@ Primeiramente o programa preenche as duas listas através dos arquivos "apoio.tx
 
 Cada idoso e cuidador são alocados apenas uma vez (quando o programa preenche as duas listas), para preencher as listas de amigos e de cuidadores o programa realiza uma busca nessas duas listas e insere somente o ponteiro. Por isso as funções de retirada não liberam a memória alocada pelo tipo.
 
-## Implementação do programa e conclusão
+## Implementação do programa e conclusão:
 Como forma de deixar mais claro o entendimento do programa, as variáveis e as funções possuem nomes significativos, mas mesmo assim cada função possui uma pequena explicação nos headers e ao longo de seu arquivo-fonte.
 
 A maior dificuldade do projeto foi trabalhar com alocação dinâmica, e praticamente todos os problemas que surgiram foram provenientes disso. Porém, a utilização do comando valgrind auxiliou muito o desenvolvimento do trabalho.
 
-## Bibliografia
+## Bibliografia:
 Para o desenvolvimento do projeto foram utilizados principalmente os materiais fornecidos pela professora Patricia Dockhorn, o livro "Introdução a Estrutura de Dados" de Waldermar Celes e o site "stackoverflow.com".
 
 
