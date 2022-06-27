@@ -13,6 +13,7 @@ OBJ_PATH_FILES = $(patsubst $(SRC)%,$(OBJ)%,$(C_FILES))
 OBJ_FILES      = $(patsubst %.c,%.o,$(OBJ_PATH_FILES))
 
 all: create_dir $(OBJ_FILES) create_final_progam
+start: clean all run
 
 create_final_progam: $(BIN)/$(NAME_PROGRAM)
 
@@ -26,35 +27,20 @@ $(OBJ)/%.o: $(SRC)/%.c $(INCLUDE)/%.h
 
 # rule for create_final_progam
 $(BIN)/%: 
-	@ echo "\033[1;32m"
-	@ echo "Creating executable...\n"
 	@ $(COMPILER) $< $(OBJ)/*.o -I $(INCLUDE) -o $@ $(FLAGS)
-	@ echo "\033[0m"
 
 # create all needed directories
 create_dir: 
-	@ echo "\033[1;32m"
-	@ echo "Creating all directories..."
 	@ mkdir $(OBJ)
 	@ mkdir $(BIN)
 	@ mkdir $(SAIDA)
-	@ echo "\033[0m"
 
 # rule to run the final program
-run: 
-	@ echo "\033[1;32m"
-	@ echo "Running $(BIN)/$(NAME_PROGRAM)"
+run:
 	@ ./$(BIN)/$(NAME_PROGRAM) $(r)
-	@ echo "\033[0m"
 
 valgrind: 
-	@ echo "\033[1;32m"
-	@ echo "Running valgrind on $(BIN)/$(NAME_PROGRAM)"
-	@ echo "\033[0m"
 	@ valgrind ./$(BIN)/$(NAME_PROGRAM) $(r)
 
 clean:
-	@ echo "\033[1;35m"
-	@ echo "Removing temporary files..."
 	@ rm -rf $(OBJ) $(NAME_PROGRAM) $(BIN) Saida/
-	@ echo "\033[0m"
