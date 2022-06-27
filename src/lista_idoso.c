@@ -16,10 +16,6 @@ Lista_idoso* Inicializa_lista_idoso(){
 }
 
 void Destroi_lista_idoso(Lista_idoso* lista){
-    if(lista == NULL){
-        printf("ERRO: Lista vazia!\n");
-        return;
-    }
     Lista_idoso* lista_temp = lista;
     Lista_idoso* lista_temp_prox = NULL;
     /*PROCURA O ULTIMO ELEMENTO DA LISTA*/

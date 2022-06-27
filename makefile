@@ -18,17 +18,11 @@ create_final_progam: $(BIN)/$(NAME_PROGRAM)
 
 # rule for main file
 $(OBJ)/$(MAIN_FILE_NAME).o: $(SRC)/$(MAIN_FILE_NAME).c
-	@ echo "\033[1;32m"
-	@ echo "Compiling main program... "
 	@ $(COMPILER) -c $< -I $(INCLUDE) -o $@ $(FLAGS)
-	@ echo "\033[0m"
 
 # rule for all o files
 $(OBJ)/%.o: $(SRC)/%.c $(INCLUDE)/%.h
-	@ echo "\033[1;32m"
-	@ echo "Compiling program $<..."
 	@ $(COMPILER) -c $< -I $(INCLUDE) -o $@ $(FLAGS)
-	@ echo "\033[0m"
 
 # rule for create_final_progam
 $(BIN)/%: 
@@ -40,11 +34,9 @@ $(BIN)/%:
 # create all needed directories
 create_dir: 
 	@ echo "\033[1;32m"
-	@ echo "Creating $(OBJ) directory...\n\n"
+	@ echo "Creating all directories..."
 	@ mkdir $(OBJ)
-	@ echo "Creating $(BIN) directory...\n\n"
 	@ mkdir $(BIN)
-	@ echo "Creating $(SAIDA) directory..."
 	@ mkdir $(SAIDA)
 	@ echo "\033[0m"
 
@@ -52,14 +44,14 @@ create_dir:
 run: 
 	@ echo "\033[1;32m"
 	@ echo "Running $(BIN)/$(NAME_PROGRAM)"
-	@ ./$(BIN)/$(NAME_PROGRAM)
+	@ ./$(BIN)/$(NAME_PROGRAM) $(r)
 	@ echo "\033[0m"
 
 valgrind: 
 	@ echo "\033[1;32m"
 	@ echo "Running valgrind on $(BIN)/$(NAME_PROGRAM)"
 	@ echo "\033[0m"
-	@ valgrind ./$(BIN)/$(NAME_PROGRAM)
+	@ valgrind ./$(BIN)/$(NAME_PROGRAM) $(r)
 
 clean:
 	@ echo "\033[1;35m"
